@@ -28,7 +28,7 @@ public interface IDnaStrand extends Iterable<Character>{
 		boolean first = true;
 		IDnaStrand ret = null;
 
-		while ((pos = search.indexOf(enzyme, pos)) >= 0) {
+		while ((pos = search.indexOf(enzyme, start)) >= 0) {
 			if (first) {
 				ret = getInstance(search.substring(start, pos));
 				first = false;
