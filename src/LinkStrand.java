@@ -8,18 +8,22 @@ public class LinkStrand implements IDnaStrand {
 			next = null;
 		}
 	}
-	   
+	  
+	//create variables
 	private Node myFirst,myLast;   
 	private long mySize;
 	private int myAppends;
 	private Node myCurrent;
 	private int myIndex;
+	private int myLocalIndex;
 
 	public LinkStrand() {
+		//call second constructor with empty string as parameter
 		this("");
 	}
 	
 	public LinkStrand(String s) {
+		//initialize all variables
 		initialize(s);
 	}
 	
@@ -30,12 +34,14 @@ public class LinkStrand implements IDnaStrand {
 
 	@Override
 	public void initialize(String source) {
+		//initialize variables
 		myFirst = new Node(source);
 		myLast = new Node(source);
 		myAppends = 0;
 		mySize = source.length();
 		myIndex = 0;
 		myCurrent = myFirst;
+		myLocalIndex = 0;
 		
 	}
 
@@ -46,6 +52,8 @@ public class LinkStrand implements IDnaStrand {
 
 	@Override
 	public IDnaStrand append(String dna) {
+		//find end of list and then add another link by changing pointer of last element to a new node,
+		//and pointing that new node to null
 		Node temp = myFirst;
 		Node last = new Node(dna);
 		while (temp.next != null) {
@@ -60,6 +68,7 @@ public class LinkStrand implements IDnaStrand {
 	}
 	
 	public String toString() {
+		//cycle though all links in list, appending .info strings to a StringBuilder object
 		StringBuilder last = new StringBuilder();
 		Node temp = myFirst;
 		if (myFirst == null) {
@@ -69,13 +78,14 @@ public class LinkStrand implements IDnaStrand {
 			last.append(temp.info);
 			temp = temp.next;
 		}
+		//convert StringBuilder to string and return it
 		String newLast = last.toString();
 		return newLast;
 	}
 
 	@Override
 	public IDnaStrand reverse() {
-		
+		//reverse direction of current pointer for each link (pointing at null if at first link in list)
 		LinkStrand x = new LinkStrand();
 		x = this;
 		
@@ -97,48 +107,52 @@ public class LinkStrand implements IDnaStrand {
 	
 	@Override
 	public int getAppendCount() {
+		//return number of times list was appended to
 		return myAppends;
 	}
 
 	@Override
 	public char charAt(int index) {
-		System.out.println("starting charAt");
+		// if index is bigger than size of LinkStrand, break
 		if (index > mySize) {
 			throw new IndexOutOfBoundsException();
 		}
-		System.out.println("all good so far");
-		System.out.println("mySize: " + mySize);
-		System.out.println("myIndex: " + myIndex);
-		System.out.println("index: " + index);
+		
+		//two pronged if statement to direct search for index
 		if (index < myIndex) {
+			//if index is less than myIndex, reset myIndex to 0 and myCurrent to first link
 			myIndex = 0;
 			myCurrent = myFirst;
-			System.out.println("starting while loop for index < myIndex");
 			while (myIndex<index) {
+				//cycle through links adding length of strings to myIndex until myIndex surpasses index
 				myIndex += myCurrent.info.length();
 				if(myIndex > index) {
+					//once myIndex surpasses index:
+					//1.	subtract the most recently added quantity
+					//2.calculate local index
+					//3.create char array of local string and choose char at local index
 					myIndex -= myCurrent.info.length();
-					int difference = index - myIndex;
+					myLocalIndex = index - myIndex;
 					char[] arr = myCurrent.info.toCharArray();
-					char charAtIndex = arr[difference];
+					char charAtIndex = arr[myLocalIndex];
 					return charAtIndex;
-				}
+				} 
 				myCurrent = myCurrent.next;
 			}
 		} else if (index >= myIndex) {
-			System.out.println("starting while loop for index >= myIndex");
+			//if index is greater than myIndex, start search at myIndex 
 			while (myIndex<=index) {
-				System.out.println("1");
+				//cycle through links adding length of strings to myIndex until myIndex surpasses index
 				myIndex += myCurrent.info.length();
-				System.out.println("2");
 				if(myIndex > index) {
+					//once myIndex surpasses index:
+					//1.	subtract the most recently added quantity
+					//2.calculate local index
+					//3.create char array of local string and choose char at local index
 					myIndex -= myCurrent.info.length();
-					System.out.println("3");
-					int difference = index - myIndex;
+					myLocalIndex = index - myIndex;
 					char[] arr = myCurrent.info.toCharArray();
-					System.out.println("4");
-					char charAtIndex = arr[difference];
-					System.out.println("5");
+					char charAtIndex = arr[myLocalIndex];
 					return charAtIndex;
 				}
 				myCurrent = myCurrent.next;
