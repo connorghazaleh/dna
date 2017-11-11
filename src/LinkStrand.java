@@ -131,18 +131,50 @@ public class LinkStrand implements IDnaStrand {
 			//cycle through links adding length of strings to myIndex until myIndex surpasses index
 			myIndex += myCurrent.info.length();
 			if(myIndex > index) {
-				//once myIndex surpasses index:
-				//1.	subtract the most recently added quantity
-				//2.calculate local index
-				//3.create char array of local string and choose char at local index
-				myIndex -= myCurrent.info.length();
-				myLocalIndex = index - myIndex;
-				char[] arr = myCurrent.info.toCharArray();
-				char charAtIndex = arr[myLocalIndex];
-				return charAtIndex;
+				break;
 			} 
 			myCurrent = myCurrent.next;
 		}
+		
+		//once myIndex surpasses index:
+		//1.	subtract the most recently added quantity
+		//2.calculate local index
+		//3.create char array of local string and choose char at local index
+		myIndex -= myCurrent.info.length();
+		myLocalIndex = index - myIndex;
+		char[] arr = myCurrent.info.toCharArray();
+		char charAtIndex = arr[myLocalIndex];
+		return charAtIndex;
+		
+		
+
+//			// Makes sure the index is valid and within the DNA strand
+//			if (index > mySize) {
+//				throw new IllegalArgumentException("Index out of bounds");
+//			}
+//			// Resets the values of myIndex and myCurrent to beginning of list
+//			if (index < myIndex) {
+//				myIndex = 0;
+//				myCurrent = myFirst;
+//			}
+//			// Cycles through each node and breaks when myIndex > index
+//			while (true) {
+//				// Add the length of the string in each node to myIndex
+//				myIndex += myCurrent.info.length();
+//				// If myIndex > index, break because you don't want to go to the next node
+//				if (myIndex > index) {
+//					break;
+//				}
+//				// Go to next node until you find the node that contains the specified index
+//				myCurrent = myCurrent.next;
+//			}
+//			char [] myChars = myCurrent.info.toCharArray();
+//			// Reset index to what it is at the beginning of the current node
+//			myIndex = myIndex - myCurrent.info.length();
+//			// Find different of index and myIndex to find index of the character within the node
+//			myLocalIndex = index-myIndex;
+//			return myChars[myLocalIndex];
+		
 		
 		
 //		//two pronged if statement to direct search for index
@@ -185,7 +217,7 @@ public class LinkStrand implements IDnaStrand {
 //				myCurrent = myCurrent.next;
 //			}
 //		}	
-		return ' ';
+		//return ' ';
 	}
 
 }
