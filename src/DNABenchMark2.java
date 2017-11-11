@@ -39,9 +39,9 @@ public class DNABenchMark2 {
 
 
 			
-		StringStrand strand = new StringStrand(mySource);
+//		StringStrand strand = new StringStrand(mySource);
 //		StringBuilderStrand strand = new StringBuilderStrand(mySource);
-//		LinkStrand strand = new LinkStrand(mySource);
+		LinkStrand strand = new LinkStrand(mySource);
 		System.out.println("length of string = " + mySource.length());
 		System.out.println("length of splice = " + splicee.length());
 		
