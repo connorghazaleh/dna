@@ -119,11 +119,11 @@ public class LinkStrand implements IDnaStrand {
 		}
 		
 		//two pronged if statement to direct search for index
-		if (index <= myIndex) {
+		if (index < myIndex) {
 			//if index is less than myIndex, reset myIndex to 0 and myCurrent to first link
 			myIndex = 0;
 			myCurrent = myFirst;
-			while (myIndex<=index) {
+			while (myIndex<index) {
 				//cycle through links adding length of strings to myIndex until myIndex surpasses index
 				myIndex += myCurrent.info.length();
 				if(myIndex > index) {
@@ -139,9 +139,9 @@ public class LinkStrand implements IDnaStrand {
 				} 
 				myCurrent = myCurrent.next;
 			}
-		} else if (index > myIndex) {
+		} else if (index >= myIndex) {
 			//if index is greater than myIndex, start search at myIndex 
-			while (myIndex<index) {
+			while (myIndex<=index) {
 				//cycle through links adding length of strings to myIndex until myIndex surpasses index
 				myIndex += myCurrent.info.length();
 				if(myIndex > index) {
