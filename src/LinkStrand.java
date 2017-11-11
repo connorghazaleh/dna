@@ -118,6 +118,10 @@ public class LinkStrand implements IDnaStrand {
 			throw new IndexOutOfBoundsException();
 		}
 		
+		if (index == 0) {
+			return myFirst.info.charAt(0);
+		}
+		
 		if (index < myIndex) {
 			//if index is less than myIndex, reset myIndex to 0 and myCurrent to first link
 			myIndex = 0;
