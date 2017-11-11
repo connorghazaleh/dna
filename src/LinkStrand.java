@@ -113,111 +113,38 @@ public class LinkStrand implements IDnaStrand {
 
 	@Override
 	public char charAt(int index) {
+		int i = 1;
 		// if index is bigger than size of LinkStrand, break
 		if (index > mySize) {
 			throw new IndexOutOfBoundsException();
 		}
 		
-		if (index == 0) {
-			return myFirst.info.charAt(0);
-		}
-		
+		//if index is less than myIndex, reset myIndex to 0 and myCurrent to first link
 		if (index < myIndex) {
-			//if index is less than myIndex, reset myIndex to 0 and myCurrent to first link
 			myIndex = 0;
 			myCurrent = myFirst;
 		}
-		while (myIndex<index) {
-			//cycle through links adding length of strings to myIndex until myIndex surpasses index
+		
+		//cycle through links adding length of strings to myIndex until myIndex surpasses index
+		while (i==1) {
 			myIndex += myCurrent.info.length();
 			if(myIndex > index) {
 				break;
 			} 
 			myCurrent = myCurrent.next;
 		}
-		
+
+	
 		//once myIndex surpasses index:
 		//1.	subtract the most recently added quantity
 		//2.calculate local index
 		//3.create char array of local string and choose char at local index
 		myIndex = myIndex - myCurrent.info.length();
-		myLocalIndex = index - myIndex-1;
+		myLocalIndex = index - myIndex;
 		char[] arr = myCurrent.info.toCharArray();
 		char charAtIndex = arr[myLocalIndex];
 		return charAtIndex;
-		
-		
 
-//			// Makes sure the index is valid and within the DNA strand
-//			if (index > mySize) {
-//				throw new IllegalArgumentException("Index out of bounds");
-//			}
-//			// Resets the values of myIndex and myCurrent to beginning of list
-//			if (index < myIndex) {
-//				myIndex = 0;
-//				myCurrent = myFirst;
-//			}
-//			// Cycles through each node and breaks when myIndex > index
-//			while (true) {
-//				// Add the length of the string in each node to myIndex
-//				myIndex += myCurrent.info.length();
-//				// If myIndex > index, break because you don't want to go to the next node
-//				if (myIndex > index) {
-//					break;
-//				}
-//				// Go to next node until you find the node that contains the specified index
-//				myCurrent = myCurrent.next;
-//			}
-//			char [] myChars = myCurrent.info.toCharArray();
-//			// Reset index to what it is at the beginning of the current node
-//			myIndex = myIndex - myCurrent.info.length();
-//			// Find different of index and myIndex to find index of the character within the node
-//			myLocalIndex = index-myIndex;
-//			return myChars[myLocalIndex];
-		
-		
-		
-//		//two pronged if statement to direct search for index
-//		if (index < myIndex) {
-//			//if index is less than myIndex, reset myIndex to 0 and myCurrent to first link
-//			myIndex = 0;
-//			myCurrent = myFirst;
-//			while (myIndex<index) {
-//				//cycle through links adding length of strings to myIndex until myIndex surpasses index
-//				myIndex += myCurrent.info.length();
-//				if(myIndex > index) {
-//					//once myIndex surpasses index:
-//					//1.	subtract the most recently added quantity
-//					//2.calculate local index
-//					//3.create char array of local string and choose char at local index
-//					myIndex -= myCurrent.info.length();
-//					myLocalIndex = index - myIndex;
-//					char[] arr = myCurrent.info.toCharArray();
-//					char charAtIndex = arr[myLocalIndex];
-//					return charAtIndex;
-//				} 
-//				myCurrent = myCurrent.next;
-//			}
-//		} else if (index >= myIndex) {
-//			//if index is greater than myIndex, start search at myIndex 
-//			while (myIndex<=index) {
-//				//cycle through links adding length of strings to myIndex until myIndex surpasses index
-//				myIndex += myCurrent.info.length();
-//				if(myIndex > index) {
-//					//once myIndex surpasses index:
-//					//1.	subtract the most recently added quantity
-//					//2.calculate local index
-//					//3.create char array of local string and choose char at local index
-//					myIndex -= myCurrent.info.length();
-//					myLocalIndex = index - myIndex;
-//					char[] arr = myCurrent.info.toCharArray();
-//					char charAtIndex = arr[myLocalIndex];
-//					return charAtIndex;
-//				}
-//				myCurrent = myCurrent.next;
-//			}
-//		}	
-		//return ' ';
 	}
 
 }

@@ -16,7 +16,7 @@ public class TestIterator {
 	public IDnaStrand getNewStrand(String s) {
 		//return new StringStrand(s);
 		//return new LinkStrand(s);
-		return new StringBuilderStrand(s);
+		return new LinkStrand(s);
 	}
 
 	
