@@ -140,8 +140,8 @@ public class LinkStrand implements IDnaStrand {
 		//1.	subtract the most recently added quantity
 		//2.calculate local index
 		//3.create char array of local string and choose char at local index
-		myIndex -= myCurrent.info.length();
-		myLocalIndex = index - myIndex;
+		myIndex = myIndex - myCurrent.info.length();
+		myLocalIndex = index - myIndex-1;
 		char[] arr = myCurrent.info.toCharArray();
 		char charAtIndex = arr[myLocalIndex];
 		return charAtIndex;
