@@ -118,46 +118,69 @@ public class LinkStrand implements IDnaStrand {
 			throw new IndexOutOfBoundsException();
 		}
 		
-		//two pronged if statement to direct search for index
 		if (index < myIndex) {
 			//if index is less than myIndex, reset myIndex to 0 and myCurrent to first link
 			myIndex = 0;
 			myCurrent = myFirst;
-			while (myIndex<index) {
-				//cycle through links adding length of strings to myIndex until myIndex surpasses index
-				myIndex += myCurrent.info.length();
-				if(myIndex > index) {
-					//once myIndex surpasses index:
-					//1.	subtract the most recently added quantity
-					//2.calculate local index
-					//3.create char array of local string and choose char at local index
-					myIndex -= myCurrent.info.length();
-					myLocalIndex = index - myIndex;
-					char[] arr = myCurrent.info.toCharArray();
-					char charAtIndex = arr[myLocalIndex];
-					return charAtIndex;
-				} 
-				myCurrent = myCurrent.next;
-			}
-		} else if (index >= myIndex) {
-			//if index is greater than myIndex, start search at myIndex 
-			while (myIndex<=index) {
-				//cycle through links adding length of strings to myIndex until myIndex surpasses index
-				myIndex += myCurrent.info.length();
-				if(myIndex > index) {
-					//once myIndex surpasses index:
-					//1.	subtract the most recently added quantity
-					//2.calculate local index
-					//3.create char array of local string and choose char at local index
-					myIndex -= myCurrent.info.length();
-					myLocalIndex = index - myIndex;
-					char[] arr = myCurrent.info.toCharArray();
-					char charAtIndex = arr[myLocalIndex];
-					return charAtIndex;
-				}
-				myCurrent = myCurrent.next;
-			}
-		}	
+		}
+		while (myIndex<index) {
+			//cycle through links adding length of strings to myIndex until myIndex surpasses index
+			myIndex += myCurrent.info.length();
+			if(myIndex > index) {
+				//once myIndex surpasses index:
+				//1.	subtract the most recently added quantity
+				//2.calculate local index
+				//3.create char array of local string and choose char at local index
+				myIndex -= myCurrent.info.length();
+				myLocalIndex = index - myIndex;
+				char[] arr = myCurrent.info.toCharArray();
+				char charAtIndex = arr[myLocalIndex];
+				return charAtIndex;
+			} 
+			myCurrent = myCurrent.next;
+		}
+		
+		
+//		//two pronged if statement to direct search for index
+//		if (index < myIndex) {
+//			//if index is less than myIndex, reset myIndex to 0 and myCurrent to first link
+//			myIndex = 0;
+//			myCurrent = myFirst;
+//			while (myIndex<index) {
+//				//cycle through links adding length of strings to myIndex until myIndex surpasses index
+//				myIndex += myCurrent.info.length();
+//				if(myIndex > index) {
+//					//once myIndex surpasses index:
+//					//1.	subtract the most recently added quantity
+//					//2.calculate local index
+//					//3.create char array of local string and choose char at local index
+//					myIndex -= myCurrent.info.length();
+//					myLocalIndex = index - myIndex;
+//					char[] arr = myCurrent.info.toCharArray();
+//					char charAtIndex = arr[myLocalIndex];
+//					return charAtIndex;
+//				} 
+//				myCurrent = myCurrent.next;
+//			}
+//		} else if (index >= myIndex) {
+//			//if index is greater than myIndex, start search at myIndex 
+//			while (myIndex<=index) {
+//				//cycle through links adding length of strings to myIndex until myIndex surpasses index
+//				myIndex += myCurrent.info.length();
+//				if(myIndex > index) {
+//					//once myIndex surpasses index:
+//					//1.	subtract the most recently added quantity
+//					//2.calculate local index
+//					//3.create char array of local string and choose char at local index
+//					myIndex -= myCurrent.info.length();
+//					myLocalIndex = index - myIndex;
+//					char[] arr = myCurrent.info.toCharArray();
+//					char charAtIndex = arr[myLocalIndex];
+//					return charAtIndex;
+//				}
+//				myCurrent = myCurrent.next;
+//			}
+//		}	
 		return ' ';
 	}
 
